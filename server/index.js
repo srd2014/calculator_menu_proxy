@@ -8,7 +8,9 @@ app.use(express.static('public'));
 
 // calculator module : homes request
 app.get('/homes', (req, res) => {
-  axios.get('http://localhost:3002/homes')
+  console.log(req.url);
+  axios.get(`http://localhost:3002${req.url}`, {
+  })
   .then(({ data }) => {
     res.send(data);
   })
