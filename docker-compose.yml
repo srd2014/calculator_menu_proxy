@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  proxy: 
+    build: 
+      context: .
+    depends_on: 
+      - 'carousel'
+      - 'calculator'
+    ports:
+      - '3010:3010'
+
+  carousel: 
+    build: image_carousel_schedule_board_module/
+    depends_on: 
+      - 'mongoDatabase'
+    ports:
+      - '3001:3001'
+
+  mysqlDatabase:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "YES"
+      MYSQL_USER: root
+      
+  calculator: 
+    build: calculator_menu_module/
+    depends_on: 
+      - 'mysqlDatabase'
+    ports:
+      - '3002:3002'
+
+  mongoDatabase:
+    image: mongo:latest
+    
