@@ -1,15 +1,18 @@
 var express = require('express');
+var cors = require('cors');
 var app = express();
 var axios = require('axios'); 
 const port = 3010; 
 
+app.use(cors());
 
 app.use(express.static('public'));
+
 
 // calculator module : homes request
 app.get('/homes', (req, res) => {
   console.log(req.url);
-  axios.get(`http://172.17.0.5:3002${req.url}`, {
+  axios.get(`http://3.15.72.86:3002${req.url}`, {
   })
   .then(({ data }) => {
     res.send(data);
@@ -21,7 +24,7 @@ app.get('/homes', (req, res) => {
 
 // calculator module : bank request
 app.get('/bank', (req, res) => {
-  axios.get('http://172.17.0.5:3002/bank')
+  axios.get('http://3.15.72.86:3002/bank')
   .then(({ data }) => {
     res.send(data); 
   })
@@ -32,7 +35,7 @@ app.get('/bank', (req, res) => {
 
 // image carousel : image request
 app.get('/image', (req, res) => {
-  axios.get(`http://172.17.0.4:3001${req.url}`)
+  axios.get(`http://3.15.72.86:3001${req.url}`)
   .then(({ data }) => {
     res.send(data);
   })
@@ -43,7 +46,7 @@ app.get('/image', (req, res) => {
 
 // static image carousel : image request 
 app.get('/images', (req, res) => {
-  axios.get(`http://172.0.17.0.4:3004${req.url}`)
+  axios.get(`http://3.15.72.86:3004${req.url}`)
   .then(({ data }) => {
     res.send(data);
   })
